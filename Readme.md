@@ -3,7 +3,6 @@
 This is a very naive implementation of an assessment regarding travel cost compensation. As a lot of information is not specified, I've made some assumptions. These assumptions are listed in the Known issues section.
 
 ## Requirements
-Note: These requirements may not be accurate, but represent the system on which the application was developed.
 - PHP 8.3
 
 ## Setup
