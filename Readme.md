@@ -12,7 +12,7 @@ This is a very naive implementation of an assessment regarding travel cost compe
 4. The output file should be generated as `compensation.csv`
 
 ## Rationale
-This is a very simple Symfony CLI single-command application for the specific purpose of an assessment. 
+This is a very simple Symfony CLI application for the specific purpose of an assessment. 
 More code to put the same hard-coded data into a database and retrieve it from there would be overkill.
 
 ## Tests
@@ -24,6 +24,8 @@ The assessment makes note of the fact that employees who travel over 10 kilomete
 However, one case is mentioned in the data where an employee travels 11 kilometers one-way by bike. 
 This is not taken into account, as it's not specified what the preferred way of commuting is.
 
+An assumption is made that every traveled kilometer between 5 and 10 is compensated double as per the description of the assessment.
+
 As it's not specified which weekdays employees are working, the average for each week is taken. 
 No national holidays have been taken into account.
 Time off is not taken into account as that data was not available.
@@ -32,3 +34,5 @@ Compensation is not adjusted for half-days, meaning that if an employee works 4 
 Without specific data on which days are worked, it's impossible to accurately calculate the compensation for each individual month. 
 Thus, the only sane way to do this is to calculate the average compensation per week and multiply that by 52, then divide that by 12 to get the average for each month. 
 This is expected to be inaccurate for any real-world scenario.
+
+One last assumption is that the travel compensation is paid in full, for each day worked. This means the distance is multiplied by 2, as the employee has to travel to and from work.

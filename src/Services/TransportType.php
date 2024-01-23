@@ -7,6 +7,7 @@ namespace App\Services;
 enum TransportType: string
 {
     case CAR = 'car';
-    case PUBLIC = 'public';
+    case BUS = 'bus';
+    case TRAIN = 'train';
     case BIKE = 'bike';
 }

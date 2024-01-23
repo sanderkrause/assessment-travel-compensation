@@ -44,18 +44,16 @@ class CalculateCompensationCommand extends Command
             $paymentDate = $this->compensationService->getPaymentDate($month);
 
             foreach ($employees as $employee) {
-                $baseCompensation = $this->compensationService->getBaseCompensation($employee['distance'], $employee['transport']);
+                $baseCompensation = $this->compensationService->getDailyCompensation($employee['distance'], $employee['transport']);
                 // Note: using the base one-way distance because it determines the compensation rate
                 $monthlyCompensation = $this->compensationService->calculateMonthlyCompensation($baseCompensation, $employee['workdays']);
-                $employee['traveledDistance'] = $this->compensationService->calculateDistanceTraveled($employee['distance'], $employee['workdays']);
-                $employee['monthlyCompensation'] = $monthlyCompensation;
-                $employee['sanityCheck'] = $employee['traveledDistance'] * $baseCompensation;
+                $traveledDistance = $this->compensationService->calculateMonthlyDistanceTraveled($employee['distance'], $employee['workdays']);
 
                 $rows[] = [
-                    'Employee' => $employee['name'],
+                    'Employee' => $employee['employee'],
                     'Transport' => ucfirst($employee['transport']),
-                    'Traveled Distance' => $employee['traveledDistance'],
-                    'Compensation' => $employee['monthlyCompensation'],
+                    'Traveled Distance' => $traveledDistance,
+                    'Compensation' => $monthlyCompensation,
                     'Payment Date' => $paymentDate,
                 ];
             }
